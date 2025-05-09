@@ -48,8 +48,14 @@ export default function Page() {
     }, [room]);
 
 
+    // 自动聚焦
+    useEffect(() => {
+        inputRef.current?.focus()
+    }, []);
+
+
     // 聚焦 div 时监听键盘输入
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Backspace') {
             setCode((prev) => prev.slice(0, -1));
         } else if (e.key === 'Enter') {
@@ -67,10 +73,6 @@ export default function Page() {
         }
     };
 
-    // 自动聚焦
-    useEffect(() => {
-        inputRef.current?.focus()
-    }, []);
 
     const MAX_LENGTH = 6;
     const chars = Array.from({ length: MAX_LENGTH }, (_, i) => code[i] || '');
@@ -87,7 +89,7 @@ export default function Page() {
                     />
                     {/* 文字叠加在图上 */}
                     <div
-                        className="absolute inset-0 bg-black font-mono bg-opacity-40 flex flex-col justify-center items-center text-white text-center px-10">
+                        className="absolute inset-0 bg-opacity-20 bg-black font-mono  flex flex-col justify-center items-center text-white text-center px-10">
                         <h1 className="text-4xl font-bold mb-4">WELCOME MY FRIEND</h1>
                         <p className="text-lg max-w-xl">
                             I&#39;m here to help, Let&#39;s go for it.
@@ -107,7 +109,7 @@ export default function Page() {
                         {chars.map((char, i) => (
                             <div
                                 key={i}
-                                className="w-8 h-10 flex items-center justify-center border-b-2 border-lime-50 font-mono text-lime-50 text-xl"
+                                className="w-8 h-10 flex items-center justify-center border-b-2 border-lime-50 font-mono text-white text-xl"
                             >
                                 {char}
                             </div>
@@ -147,7 +149,7 @@ function SimpleVoiceAssistant(props: { onConnectButtonClicked: () => void }) {
                             initial={{opacity: 0}}
                             animate={{opacity: 1}}
                             transition={{duration: 0.3, delay: 0.1}}
-                            className="uppercase px-4 py-2 bg-white text-black rounded-md"
+                            className="uppercase px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full shadow-md hover:shadow-lg transition-all"
                             onClick={() => props.onConnectButtonClicked()}
                         >
                             Start a conversation
