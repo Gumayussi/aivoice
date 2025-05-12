@@ -130,49 +130,6 @@ export default function Page() {
     );
 }
 
-export function VoiceSummonOrb({ onActivate }: { onActivate: () => void }) {
-    return (
-        <div className="h-screen w-screen bg-black flex items-center justify-center">
-            {/* 外层扩散光圈 */}
-            <motion.div
-                className="absolute w-64 h-64 rounded-full border border-white/10"
-                animate={{
-                    scale: [1, 1.2],
-                    opacity: [0.4, 0],
-                }}
-                transition={{
-                    repeat: Infinity,
-                    duration: 2,
-                    ease: "easeInOut",
-                }}
-            />
-
-            {/* 中层核心球体 */}
-            <motion.div
-                initial={{ scale: 1 }}
-                animate={{
-                    scale: [1, 1.05, 1],
-                    filter: ["blur(2px)", "blur(4px)", "blur(2px)"],
-                }}
-                transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                }}
-                whileHover={{
-                    scale: 1.1,
-                    boxShadow: "0 0 30px rgba(255,255,255,0.3)",
-                }}
-                whileTap={{ scale: 1.2 }}
-                onClick={onActivate}
-                className="relative z-10 w-40 h-40 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm cursor-pointer flex items-center justify-center"
-            >
-                <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-            </motion.div>
-        </div>
-    );
-}
-
 function SimpleVoiceAssistant(props: { onConnectButtonClicked: () => void }) {
     const {state: agentState} = useVoiceAssistant();
 
@@ -180,7 +137,24 @@ function SimpleVoiceAssistant(props: { onConnectButtonClicked: () => void }) {
         <>
             <AnimatePresence mode="wait">
                 {agentState === "disconnected" ? (
-                    <VoiceSummonOrb onActivate={props.onConnectButtonClicked} />
+                    <motion.div
+                        key="disconnected"
+                        initial={{opacity: 0, scale: 0.95}}
+                        animate={{opacity: 1, scale: 1}}
+                        exit={{opacity: 0, scale: 0.95}}
+                        transition={{duration: 0.3, ease: [0.09, 1.04, 0.245, 1.055]}}
+                        className="grid items-center justify-center h-full"
+                    >
+                        <motion.button
+                            initial={{opacity: 0}}
+                            animate={{opacity: 1}}
+                            transition={{duration: 0.3, delay: 0.1}}
+                            className="uppercase px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full shadow-md hover:shadow-lg transition-all"
+                            onClick={() => props.onConnectButtonClicked()}
+                        >
+                            Start a conversation
+                        </motion.button>
+                    </motion.div>
                 ) : (
                     <motion.div
                         key="connected"
