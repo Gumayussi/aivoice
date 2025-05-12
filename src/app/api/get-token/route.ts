@@ -2,7 +2,6 @@ import { AccessToken, AccessTokenOptions, VideoGrant } from "livekit-server-sdk"
 import { NextRequest, NextResponse } from "next/server";
 import { RoomServiceClient } from "livekit-server-sdk";
 
-export const runtime = 'edge';
 
 const API_KEY = process.env.LIVEKIT_API_KEY;
 const API_SECRET = process.env.LIVEKIT_API_SECRET;
