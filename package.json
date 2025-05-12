@@ -26,6 +26,7 @@
     "sharp": "^0.33.5"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.12",
     "@eslint/eslintrc": "^3",
     "@livekit/components-react": "^2.9.3",
     "@livekit/components-styles": "^1.1.5",
