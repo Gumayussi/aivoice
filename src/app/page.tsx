@@ -28,8 +28,12 @@ export default function Page() {
 
 
     const onConnectButtonClicked = useCallback(async () => {
+        // const url = new URL(
+        //     process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT ?? `/api/get-token?roomName=${roomName}&participantName=${userName}`,
+        //     window.location.origin
+        // );
         const url = new URL(
-            process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT ?? `/api/get-token?roomName=${roomName}&participantName=${userName}`,
+            `/api/get-token?roomName=${roomName}&participantName=${userName}`,
             window.location.origin
         );
         const response = await fetch(url.toString());
