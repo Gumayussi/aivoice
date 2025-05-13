@@ -35,6 +35,8 @@ export default function Page() {
         const response = await fetch(url.toString());
         const connectionDetailsData: ConnectionDetails = await response.json();
 
+        console.log("================================")
+        console.log(connectionDetailsData);
         await room.connect(connectionDetailsData.serverUrl, connectionDetailsData.participantToken);
         await room.localParticipant.setMicrophoneEnabled(true);
     }, [room]);
