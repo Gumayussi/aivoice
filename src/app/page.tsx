@@ -85,9 +85,9 @@ export default function Page() {
 
     if (!invited) {
         return (
-            <div className="flex h-screen">
+            <div className="flex flex-col md:flex-row h-screen">
                 {/* 左侧：主视觉横幅图 + 文案 */}
-                <div className="w-3/4 relative">
+                <div className="w-full md:w-3/4 h-1/2 md:h-full relative">
                     <img
                         src="/flatmap.png"
                         alt="main"
@@ -95,23 +95,27 @@ export default function Page() {
                     />
                     {/* 文字叠加在图上 */}
                     <div
-                        className="absolute inset-0 bg-opacity-20 bg-black font-mono  flex flex-col justify-center items-center text-white text-center px-10">
-                        <h1 className="text-4xl font-bold mb-4">WELCOME MY FRIEND</h1>
-                        <p className="text-lg max-w-xl">
+                        className="absolute inset-0 bg-opacity-20 bg-black font-mono flex flex-col justify-center items-center text-white text-center px-4"
+                    >
+                        <h1 className="text-3xl sm:text-4xl font-bold mb-4">WELCOME MY FRIEND</h1>
+                        <p className="text-base sm:text-lg max-w-xl">
                             I&#39;m here to help, Let&#39;s go for it.
                         </p>
                     </div>
                 </div>
+
                 {/* 右侧：输入框区域 */}
-                <div className="w-1/4 bg-black flex flex-col items-center justify-center">
-                    <h2 className=" text-lime-50 text-lg font-mono mb-4 tracking-wider">
+                <div className="w-full md:w-1/4 bg-black flex flex-col items-center justify-center py-6">
+                    <h2 className="text-lime-50 text-lg font-mono mb-4 tracking-wider">
                         [System] Access Code Required
                     </h2>
 
-                    <div  ref={inputRef}
-                          tabIndex={-1}
-                          onKeyDown={handleKeyDown}
-                          className="w-full flex justify-center gap-x-2 px-8 py-3 outline-none">
+                    <div
+                        ref={inputRef}
+                        tabIndex={-1}
+                        onKeyDown={handleKeyDown}
+                        className="flex justify-center gap-x-2 w-full max-w-xs px-4 outline-none"
+                    >
                         {chars.map((char, i) => (
                             <div
                                 key={i}
